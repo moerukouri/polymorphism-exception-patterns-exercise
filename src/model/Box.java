@@ -3,7 +3,7 @@ package model;
 import util.Validator;
 
 public class Box extends Parcel {
-    private final double MAX_WEIGHT = 50.0;
+    public static final double MAX_WEIGHT = 50.0;
     private final double FEE_PER_KG = 40.0;
     private final double VOLUMETRIC_DIVISOR = 3500.0;
 

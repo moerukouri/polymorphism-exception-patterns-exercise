@@ -3,8 +3,8 @@ package model;
 import util.Validator;
 
 public class Document extends Parcel {
+    public static final double MAX_WEIGHT = 0.5;
     private final double BASE_FEE = 50.0;
-    private final double MAX_WEIGHT = 0.5;
     private final int MIN_PAGES = 1;
     private final int MAX_PAGES = 100;
 
