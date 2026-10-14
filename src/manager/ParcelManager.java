@@ -1,12 +1,13 @@
 package manager;
 
-import java.util.Map;
-import java.util.LinkedHashMap;
+import exception.DuplicateParcelException;
+import exception.ParcelException;
+import exception.ParcelNotFoundException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import model.Parcel;
-import exception.DuplicateParcelException;
-import exception.ParcelNotFoundException;
 
 public class ParcelManager {
     private static ParcelManager instance;
@@ -25,7 +26,15 @@ public class ParcelManager {
         return parcels.containsKey(trackingNumber);
     }
 
+    public void isNull(Parcel parcel){
+        if (parcel == null){
+            throw new ParcelException("Parcel cannot be null.");
+        }
+    }
+
     public void addParcel(Parcel parcel) {
+        isNull(parcel);
+
         String trackingNumber = parcel.getTrackingNumber();
         if(exists(trackingNumber)){
             throw new DuplicateParcelException(trackingNumber);
