@@ -99,7 +99,10 @@ public class UserInterface {
     }
 
     private DeliveryStrategy readService() {
-        System.out.println("1. Standard  2. Express  3. Same Day");
+        printBanner("Delivery Service");
+        System.out.println("1. Standard");
+        System.out.println("2. Express");
+        System.out.println("3. Same Day");
         return SERVICES[input.readInteger("Select delivery service: ", 1, 3, "Delivery service") - 1];
     }
 
