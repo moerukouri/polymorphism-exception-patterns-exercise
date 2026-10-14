@@ -19,11 +19,11 @@ public class Validator {
         return input;
     }
 
-    public static double validateMaxWeight(double weight, double maxWeight, String fieldName) {
-        if (weight > maxWeight) {
-            throw new InvalidInputException(fieldName + " must not exceed " + maxWeight + ".");
+    public static double validateMax(double value, double max, String fieldName) {
+        if (value > max) {
+            throw new InvalidInputException(fieldName + " must not exceed " + max + ".");
         }
-        return weight;
+        return value;
     }
 
     public static double validatePositiveDouble(double value, String fieldName) {

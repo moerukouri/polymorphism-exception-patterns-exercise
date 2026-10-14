@@ -12,7 +12,7 @@ public class Document extends Parcel {
 
     public Document(String trackingNumber, String receiverName, double weight, int pages) {
         super(trackingNumber, receiverName, weight);
-        Validator.validateMaxWeight(weight, MAX_WEIGHT, "Weight");
+        Validator.validateMax(weight, MAX_WEIGHT, "Weight");
         this.pages = Validator.validateInRange(pages, MIN_PAGES, MAX_PAGES, "Pages");
     }
 

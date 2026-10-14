@@ -10,7 +10,7 @@ public class Fragile extends Box {
 
     public Fragile(String trackingNumber, String receiverName, double weight, int length, int width, int height, String handlingNote) {
         super(trackingNumber, receiverName, weight, length, width, height);
-        Validator.validateMaxWeight(weight, MAX_WEIGHT, "Weight");
+        Validator.validateMax(weight, MAX_WEIGHT, "Weight");
         this.handlingNote = Validator.validateNonBlank(handlingNote, "Handling Note");
     }
 

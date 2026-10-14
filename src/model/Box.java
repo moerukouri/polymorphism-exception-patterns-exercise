@@ -13,7 +13,7 @@ public class Box extends Parcel {
 
     public Box(String trackingNumber, String receiverName, double weight, int length, int width, int height) {
         super(trackingNumber, receiverName, weight);
-        Validator.validateMaxWeight(weight, MAX_WEIGHT, "Weight");
+        Validator.validateMax(weight, MAX_WEIGHT, "Weight");
         this.length = Validator.validatePositiveInt(length, "Length");
         this.width = Validator.validatePositiveInt(width, "Width");
         this.height = Validator.validatePositiveInt(height, "Height");
