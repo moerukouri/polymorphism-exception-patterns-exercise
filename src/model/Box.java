@@ -4,8 +4,8 @@ import util.Validator;
 
 public class Box extends Parcel {
     public static final double MAX_WEIGHT = 50.0;
-    private final double FEE_PER_KG = 40.0;
-    private final double VOLUMETRIC_DIVISOR = 3500.0;
+    private static final double FEE_PER_KG = 40.0;
+    private static final double VOLUMETRIC_DIVISOR = 3500.0;
 
     private final int length;
     private final int width;

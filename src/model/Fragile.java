@@ -4,7 +4,7 @@ import util.Validator;
 
 public class Fragile extends Box {
     public static final double FRAGILE_MAX_WEIGHT = 30.0;
-    private final double HANDLING_FEE = 100.0;
+    private static final double HANDLING_FEE = 100.0;
 
     private final String handlingNote;
 
