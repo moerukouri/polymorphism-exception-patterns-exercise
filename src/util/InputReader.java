@@ -7,7 +7,7 @@ public class InputReader {
     private static final Scanner sc = new Scanner(System.in);
 
     public String readLine(String prompt){
-        System.out.println(prompt);
+        System.out.print(prompt);
         return sc.nextLine();
     }
 
@@ -75,7 +75,7 @@ public class InputReader {
 
                 double parsed = Double.parseDouble(input);
                 Validator.validatePositiveDouble(parsed, field);
-                value = Validator.validateMax(value, max, field);
+                value = Validator.validateMax(parsed, max, field);
                 valid = true;
             } catch (NumberFormatException e) {
                 System.out.println(field + "is too large.");

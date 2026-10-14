@@ -6,7 +6,7 @@ public class Validator {
     private Validator() {}
 
     public static String validateTrackingNumber(String trackingNumber) {
-        if (trackingNumber == null || !trackingNumber.matches("^[ABC]\\d{4}$")) {
+        if (trackingNumber == null || !trackingNumber.matches("^ABC\\d{4}$")) {
             throw new InvalidInputException("Tracking number must be in the format \"ABC\" followed by 4 digits.");
         }
         return trackingNumber;
