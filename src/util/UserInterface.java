@@ -23,8 +23,8 @@ public class UserInterface {
         System.out.println("5. Exit");
     }
 
-    public int getMenuChoice(int min, int max) {
-        return input.readInteger("Enter your choice: ", min, max, "Menu choice");
+    public int getMenuChoice() {
+        return input.readInteger("Enter your choice: ", 1, 5, "Menu choice");
     }
 
     public void addParcelMenu() {
@@ -103,7 +103,7 @@ public class UserInterface {
         return SERVICES[input.readInteger("Select delivery service: ", 1, 3, "Delivery service") - 1];
     }
 
-    public void viewAllParcel(){
+    public void viewAllParcels(){
 
     }
 
