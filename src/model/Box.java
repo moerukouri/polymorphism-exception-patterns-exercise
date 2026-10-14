@@ -1,5 +1,7 @@
 package model;
 
+import util.Validator;
+
 public class Box extends Parcel {
     private final double MAX_WEIGHT = 50.0;
     private final double FEE_PER_KG = 40.0;
@@ -11,9 +13,10 @@ public class Box extends Parcel {
 
     public Box(String trackingNumber, String receiverName, double weight, int length, int width, int height) {
         super(trackingNumber, receiverName, weight);
-        this.length = length;
-        this.width = width;
-        this.height = height;
+        Validator.validateMaxWeight(weight, MAX_WEIGHT, "Weight");
+        this.length = Validator.validatePositiveInt(length, "Length");
+        this.width = Validator.validatePositiveInt(width, "Width");
+        this.height = Validator.validatePositiveInt(height, "Height");
     }
 
     public double getVolumetricWeight() {

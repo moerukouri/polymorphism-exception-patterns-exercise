@@ -1,5 +1,7 @@
 package model;
 
+import util.Validator;
+
 public abstract class Parcel {
     private final String trackingNumber;
     private final String receiverName;
@@ -7,9 +9,9 @@ public abstract class Parcel {
     private Status status;
 
     protected Parcel(String trackingNumber, String receiverName, double weight) {
-        this.trackingNumber = trackingNumber;
-        this.receiverName = receiverName;
-        this.weight = weight;
+        this.trackingNumber = Validator.validateTrackingNumber(trackingNumber);
+        this.receiverName = Validator.validateNonBlank(receiverName, "Receiver Name");
+        this.weight = Validator.validatePositiveDouble(weight, "Weight");
         this.status = Status.PENDING;
     }
 
