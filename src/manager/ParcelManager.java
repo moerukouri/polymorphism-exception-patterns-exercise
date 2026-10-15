@@ -45,7 +45,7 @@ public class ParcelManager {
     public Parcel findParcel(String trackingNumber) {
         Parcel parcel = parcels.get(trackingNumber);
         if(parcel == null){
-            throw new ParcelNotFoundException(trackingNumber);
+            throw new ParcelNotFoundException("Parcel not found!");
         }
         return parcel;
     }
