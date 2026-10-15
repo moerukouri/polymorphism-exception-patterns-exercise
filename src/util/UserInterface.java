@@ -1,6 +1,7 @@
 package util;
 
 import exception.ParcelException;
+import exception.ParcelNotFoundException;
 import exception.ServiceNotAllowedException;
 import java.util.Collection;
 import manager.ParcelManager;
@@ -144,17 +145,51 @@ public class UserInterface {
 
     private static void printTableHeader(int trkNumWidth, int typeWidth, int nameWidth, int chargeWeightWidth, int serviceWidth, int feeWidth, int statusWidth){
         int borderWidth = trkNumWidth + typeWidth + nameWidth + chargeWeightWidth + serviceWidth + feeWidth + statusWidth + 19;
-        String format = " %-" + trkNumWidth + "s | %-" + typeWidth + "s | %-" + nameWidth + "s | %,-" + chargeWeightWidth + ".2f | %-" + serviceWidth + "s | Php %,-" + (feeWidth - 4) + ".2f | %-" + statusWidth + "s";
+        String format = " %-" + trkNumWidth + "s | %-" + typeWidth + "s | %-" + nameWidth + "s | %-" + chargeWeightWidth + "s | %-" + serviceWidth + "s | %-" + feeWidth + "s | %-" + statusWidth + "s%n";
         System.out.printf(format, "Tracking Number", "Parcel Type", "Receiver Name", "Chargeable Weight (kg)", "Delivery Service", "Delivery Fee", "Status");
         System.out.println("-".repeat(borderWidth));
     }
 
     public void changeDeliveryService(){
+        printBanner("Change Delivery Service");
+        try {
+            Parcel parcel = manager.findParcel(readLookupNumber());
+            if(parcel.isDelivered()){
+                System.out.println("Parcel already delivered!");
+                return;
+            }
+            DeliveryStrategy newStrategy = readService();
+            if(newStrategy.getServiceName().equals(parcel.getDeliveryStrategy().getServiceName())){
+                System.out.println("Parcel is already using " + newStrategy.getServiceName() + " delivery.");
+                return;
+            }
 
+            parcel.setDeliveryStrategy(newStrategy);
+            System.out.printf("Delivery service changed! New fee: Php %.2f%n", parcel.calculateDeliveryFee());
+        } catch (ParcelNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (ParcelException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private String readLookupNumber() {
+        return input.readLine("Enter tracking number: ").trim().toUpperCase();
     }
 
     public void markAsDelivered(){
-
+        printBanner("Mark as Delivered");
+        try {
+            Parcel parcel = manager.findParcel(readLookupNumber());
+            if (parcel.isDelivered()){
+                System.out.println("Parcel was already delivered.");
+            } else {
+                parcel.markAsDelivered();
+                System.out.println("Parcel delivered successfully!");
+            }
+        } catch (ParcelNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void printBanner(String title) {
