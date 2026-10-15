@@ -29,7 +29,7 @@ public abstract class Parcel {
 
     public void setDeliveryStrategy(DeliveryStrategy deliveryStrategy) {
         if (!deliveryStrategy.isAllowedFor(getChargeableWeight())) {
-            throw new ServiceNotAllowedException(deliveryStrategy.getServiceName() + " delivery is only for parcels up to " + (int) SameDayDelivery.getMaxChargeableWeight() + "kg!");
+            throw new ServiceNotAllowedException("Same Day delivery is only for parcels up to " + (int) SameDayDelivery.getMaxChargeableWeight() + "kg!");
         }
         this.deliveryStrategy = deliveryStrategy;
     }
@@ -45,5 +45,11 @@ public abstract class Parcel {
     public String getReceiverName() { return receiverName; }
     public double getWeight() { return weight; }
     public boolean isDelivered() { return status == Status.DELIVERED; }
-    public String getStatus() { return status.toString(); }
+    public String getStatus() { return status.getLabel(); }
+    public DeliveryStrategy getDeliveryStrategy() { return deliveryStrategy; }
+
+    public String toTableRow(int trkNumWidth, int typeWidth, int nameWidth, int chargeWeightWidth, int serviceWidth, int feeWidth, int statusWidth){
+        String format = " %-" + trkNumWidth + "s | %-" + typeWidth + "s | %-" + nameWidth + "s | %,-" + chargeWeightWidth + ".2f | %-" + serviceWidth + "s | Php %,-" + (feeWidth - 4) + ".2f | %-" + statusWidth + "s";
+        return String.format(format, trackingNumber, getParcelType().getLabel(), receiverName, getChargeableWeight(), deliveryStrategy.getServiceName(), calculateDeliveryFee(), getStatus());
+    }
 }

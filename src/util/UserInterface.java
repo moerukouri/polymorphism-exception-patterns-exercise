@@ -2,6 +2,7 @@ package util;
 
 import exception.ParcelException;
 import exception.ServiceNotAllowedException;
+import java.util.Collection;
 import manager.ParcelManager;
 import model.*;
 import strategy.*;
@@ -107,7 +108,45 @@ public class UserInterface {
     }
 
     public void viewAllParcels(){
+        printBanner("All Parcels");
+        Collection<Parcel> all = manager.getAllParcels();
+        if(all.isEmpty()){
+            System.out.println("No parcels yet.");
+            return;
+        }
+        printParcels(all);
+    }
 
+    private static void printParcels(Collection<Parcel> parcels){
+        int trkNumWidth = "Tracking Number".length();
+        int typeWidth = "Parcel Type".length();
+        int nameWidth = "Receiver Name".length();
+        int chargeWeightWidth = "Chargeable Weight (kg)".length();
+        int serviceWidth = "Delivery Service".length();
+        int feeWidth = "Delivery Fee".length();
+        int statusWidth = "Status".length();
+
+        for (Parcel p : parcels){
+            trkNumWidth = Math.max(trkNumWidth, p.getTrackingNumber().length());
+            typeWidth = Math.max(typeWidth, p.getParcelType().getLabel().length());
+            nameWidth = Math.max(nameWidth, p.getReceiverName().length());
+            chargeWeightWidth = Math.max(chargeWeightWidth, String.format("%,.2f", p.getChargeableWeight()).length());
+            serviceWidth = Math.max(serviceWidth, p.getDeliveryStrategy().getServiceName().length());
+            feeWidth = Math.max(feeWidth, String.format("Php %,.2f", p.calculateDeliveryFee()).length());
+            statusWidth = Math.max(statusWidth, p.getStatus().length());
+        }
+
+        printTableHeader(trkNumWidth, typeWidth, nameWidth, chargeWeightWidth, serviceWidth, feeWidth, statusWidth);
+        for (Parcel p : parcels){
+            System.out.println(p.toTableRow(trkNumWidth, typeWidth, nameWidth, chargeWeightWidth, serviceWidth, feeWidth, statusWidth));
+        }
+    }
+
+    private static void printTableHeader(int trkNumWidth, int typeWidth, int nameWidth, int chargeWeightWidth, int serviceWidth, int feeWidth, int statusWidth){
+        int borderWidth = trkNumWidth + typeWidth + nameWidth + chargeWeightWidth + serviceWidth + feeWidth + statusWidth + 19;
+        String format = " %-" + trkNumWidth + "s | %-" + typeWidth + "s | %-" + nameWidth + "s | %,-" + chargeWeightWidth + ".2f | %-" + serviceWidth + "s | Php %,-" + (feeWidth - 4) + ".2f | %-" + statusWidth + "s";
+        System.out.printf(format, "Tracking Number", "Parcel Type", "Receiver Name", "Chargeable Weight (kg)", "Delivery Service", "Delivery Fee", "Status");
+        System.out.println("-".repeat(borderWidth));
     }
 
     public void changeDeliveryService(){
