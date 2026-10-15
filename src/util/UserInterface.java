@@ -110,12 +110,10 @@ public class UserInterface {
 
     public void viewAllParcels(){
         printBanner("All Parcels");
-        Collection<Parcel> all = manager.getAllParcels();
-        if(all.isEmpty()){
-            System.out.println("No parcels yet.");
+        if (!hasParcels()){
             return;
         }
-        printParcels(all);
+        printParcels(manager.getAllParcels());
     }
 
     private static void printParcels(Collection<Parcel> parcels){
@@ -152,6 +150,9 @@ public class UserInterface {
 
     public void changeDeliveryService(){
         printBanner("Change Delivery Service");
+        if (!hasParcels()){
+            return;
+        }
         try {
             Parcel parcel = manager.findParcel(readLookupNumber());
             if(parcel.isDelivered()){
@@ -179,6 +180,12 @@ public class UserInterface {
 
     public void markAsDelivered(){
         printBanner("Mark as Delivered");
+        if (!hasParcels()){
+            return;
+        }
+        if (!hasPendingParcels()){
+            return;
+        }
         try {
             Parcel parcel = manager.findParcel(readLookupNumber());
             if (parcel.isDelivered()){
@@ -190,6 +197,24 @@ public class UserInterface {
         } catch (ParcelNotFoundException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private static boolean hasParcels() {
+        if (manager.getAllParcels().isEmpty()){
+            System.out.println("No parcels yet.");
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean hasPendingParcels() {
+        for (Parcel p : manager.getAllParcels()){
+            if(!p.isDelivered()){
+                return true;
+            }
+        }
+        System.out.println("All parcels are already delivered.");
+        return false;
     }
 
     private static void printBanner(String title) {
