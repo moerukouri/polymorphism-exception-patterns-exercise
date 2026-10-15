@@ -3,6 +3,7 @@ package strategy;
 public class SameDayDelivery implements DeliveryStrategy {
     private final String SERVICE_NAME = "SAME DAY";
     private final double FEE_MULTIPLIER = 2.0;
+    private final double FEE_ADDITION = 100;
     public static final double MAX_CHARGEABLE_WEIGHT = 10.0;
 
     public static double getMaxChargeableWeight() { return MAX_CHARGEABLE_WEIGHT; }
@@ -14,7 +15,7 @@ public class SameDayDelivery implements DeliveryStrategy {
 
     @Override
     public double computeFee(double baseFee) {
-        return baseFee * FEE_MULTIPLIER;
+        return (baseFee * FEE_MULTIPLIER) + FEE_ADDITION;
     }
 
     @Override
