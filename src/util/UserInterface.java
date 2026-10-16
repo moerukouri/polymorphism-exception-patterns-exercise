@@ -50,7 +50,7 @@ public class UserInterface {
             };
             assignService(parcel);
             manager.addParcel(parcel);
-            System.out.printf("Parcel added successfully! Delivery fee: Php %.2f%n", parcel.calculateDeliveryFee());
+            System.out.printf("Parcel added successfully! Delivery fee: Php %,.2f%n", parcel.calculateDeliveryFee());
         } catch (ParcelException e) {
             System.out.println("Could not add parcel: " + e.getMessage());
         }
@@ -169,7 +169,7 @@ public class UserInterface {
             }
 
             parcel.setDeliveryStrategy(newStrategy);
-            System.out.printf("Delivery service changed! New fee: Php %.2f%n", parcel.calculateDeliveryFee());
+            System.out.printf("Delivery service changed! New fee: Php %,.2f%n", parcel.calculateDeliveryFee());
         } catch (ParcelNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (ParcelException e) {
