@@ -29,6 +29,7 @@ public class UserInterface {
         return input.readInteger("Enter your choice: ", 1, 5, "Menu choice");
     }
 
+    // --- 1. Add Parcel ---
     public void addParcelMenu() {
         printBanner("Add Parcel");
         System.out.println("1. Add Document");
@@ -107,7 +108,8 @@ public class UserInterface {
         System.out.println("3. Same Day");
         return SERVICES[input.readInteger("Select delivery service: ", 1, 3, "Delivery service") - 1];
     }
-
+    
+    // --- 2. View All Parcels ---
     public void viewAllParcels(){
         printBanner("All Parcels");
         if (!hasParcels()){
@@ -148,6 +150,7 @@ public class UserInterface {
         System.out.println("-".repeat(borderWidth));
     }
 
+    // --- 3. Change Delivery Service ---
     public void changeDeliveryService(){
         printBanner("Change Delivery Service");
         if (!hasParcels()){
@@ -178,12 +181,10 @@ public class UserInterface {
         return input.readLine("Enter tracking number: ").trim().toUpperCase();
     }
 
+    // --- 4. Mark as Delivered ---
     public void markAsDelivered(){
         printBanner("Mark as Delivered");
-        if (!hasParcels()){
-            return;
-        }
-        if (!hasPendingParcels()){
+        if (!hasParcels() || !hasPendingParcels()){
             return;
         }
         try {
@@ -217,6 +218,7 @@ public class UserInterface {
         return false;
     }
 
+    // --- Helpers ---
     private static void printBanner(String title) {
         System.out.println(BORDER_STRING);
         System.out.println(centerTitle(title));
