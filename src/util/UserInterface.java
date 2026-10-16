@@ -78,7 +78,7 @@ public class UserInterface {
     }
 
     private int readDimension(String name) {
-        return input.readInteger("Enter " + name.toLowerCase() + " (cm): ", 1, MAX_DIMENSIONS, name);
+        return input.readInteger("Enter " + name.toLowerCase() + " (1-" + MAX_DIMENSIONS + " cm): ", 1, MAX_DIMENSIONS, name);
     }
 
     private String readUniqueTrackingNumber(){
