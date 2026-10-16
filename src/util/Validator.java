@@ -21,7 +21,7 @@ public class Validator {
 
     public static double validateMax(double value, double max, String fieldName) {
         if (value > max) {
-            throw new InvalidInputException(fieldName + " must not exceed " + max + ".");
+            throw new InvalidInputException(fieldName + " must not exceed " + max + " kg.");
         }
         return value;
     }
