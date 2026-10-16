@@ -29,7 +29,7 @@ public abstract class Parcel {
 
     public void setDeliveryStrategy(DeliveryStrategy deliveryStrategy) {
         if (!deliveryStrategy.isAllowedFor(getChargeableWeight())) {
-            throw new ServiceNotAllowedException("Same Day delivery is only for parcels up to " + (int) SameDayDelivery.getMaxChargeableWeight() + "kg!");
+            throw new ServiceNotAllowedException("Same Day delivery is only for parcels up to " + (int) SameDayDelivery.getMaxChargeableWeight() + " kg!");
         }
         this.deliveryStrategy = deliveryStrategy;
     }
