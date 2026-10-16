@@ -30,7 +30,7 @@ public class InputReader {
         boolean valid = false;
         do { 
             try {
-                value = Validator.validateTrackingNumber(readLine(prompt).trim().toUpperCase());
+                value = Validator.validateTrackingNumber(readLine(prompt).trim());
                 valid = true;
             } catch (InvalidInputException e) {
                 System.out.println(e.getMessage());
@@ -54,7 +54,7 @@ public class InputReader {
                 value = Validator.validateInRange(parsed, min, max, field);
                 valid = true;        
             } catch (NumberFormatException e) {
-                System.out.println(field + "is too large.");
+                System.out.println(field + " is too large.");
             } catch (InvalidInputException e){
                 System.out.println(e.getMessage());
             }
@@ -69,8 +69,8 @@ public class InputReader {
             try {
                 String input = readLine(prompt).trim();
                 
-                if(!input.matches("^(0|[1-9][0-9]*)(\\.[0-9]{1,2})?$")){
-                    throw new InvalidInputException(field + " must be a valid number with no leading zeros.");
+                if(!input.matches("^(0|[1-9][0-9]*)(\\.[0-9]{1,3})?$")){
+                    throw new InvalidInputException(field + " must be a valid number with up to 3 decimal places and no leading zeros.");
                 }
 
                 double parsed = Double.parseDouble(input);
@@ -78,7 +78,7 @@ public class InputReader {
                 value = Validator.validateMax(parsed, max, field);
                 valid = true;
             } catch (NumberFormatException e) {
-                System.out.println(field + "is too large.");
+                System.out.println(field + " is too large.");
             } catch (InvalidInputException e) {
                 System.out.println(e.getMessage());
             }

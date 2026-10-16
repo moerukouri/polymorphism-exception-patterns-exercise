@@ -12,6 +12,7 @@ public class UserInterface {
     private static final InputReader input = new InputReader();
     private static final ParcelManager manager = ParcelManager.getInstance();
     private static final DeliveryStrategy[] SERVICES = {new StandardDelivery(), new ExpressDelivery(), new SameDayDelivery()};
+    private static final int MAX_DIMENSIONS = 200;
     private static final int BORDER_LENGTH = 50;
     private static final String BORDER_CHAR = "=";
     private static final String BORDER_STRING = BORDER_CHAR.repeat(BORDER_LENGTH);
@@ -77,7 +78,7 @@ public class UserInterface {
     }
 
     private int readDimension(String name) {
-        return input.readInteger("Enter " + name.toLowerCase() + " (cm): ", 1, Integer.MAX_VALUE, name);
+        return input.readInteger("Enter " + name.toLowerCase() + " (cm): ", 1, MAX_DIMENSIONS, name);
     }
 
     private String readUniqueTrackingNumber(){
@@ -131,7 +132,7 @@ public class UserInterface {
             trkNumWidth = Math.max(trkNumWidth, p.getTrackingNumber().length());
             typeWidth = Math.max(typeWidth, p.getParcelType().getLabel().length());
             nameWidth = Math.max(nameWidth, p.getReceiverName().length());
-            chargeWeightWidth = Math.max(chargeWeightWidth, String.format("%,.2f", p.getChargeableWeight()).length());
+            chargeWeightWidth = Math.max(chargeWeightWidth, String.format("%,.3f", p.getChargeableWeight()).length());
             serviceWidth = Math.max(serviceWidth, p.getDeliveryStrategy().getServiceName().length());
             feeWidth = Math.max(feeWidth, String.format("Php %,.2f", p.calculateDeliveryFee()).length());
             statusWidth = Math.max(statusWidth, p.getStatus().length());

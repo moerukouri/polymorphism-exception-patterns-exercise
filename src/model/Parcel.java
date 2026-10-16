@@ -49,7 +49,7 @@ public abstract class Parcel {
     public DeliveryStrategy getDeliveryStrategy() { return deliveryStrategy; }
 
     public String toTableRow(int trkNumWidth, int typeWidth, int nameWidth, int chargeWeightWidth, int serviceWidth, int feeWidth, int statusWidth){
-        String format = " %-" + trkNumWidth + "s | %-" + typeWidth + "s | %-" + nameWidth + "s | %,-" + chargeWeightWidth + ".2f | %-" + serviceWidth + "s | Php %,-" + (feeWidth - 4) + ".2f | %-" + statusWidth + "s";
+        String format = " %-" + trkNumWidth + "s | %-" + typeWidth + "s | %-" + nameWidth + "s | %,-" + chargeWeightWidth + ".3f | %-" + serviceWidth + "s | Php %,-" + (feeWidth - 4) + ".2f | %-" + statusWidth + "s";
         return String.format(format, trackingNumber, getParcelType().getLabel(), receiverName, getChargeableWeight(), deliveryStrategy.getServiceName(), calculateDeliveryFee(), getStatus());
     }
 }
