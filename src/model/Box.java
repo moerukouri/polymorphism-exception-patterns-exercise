@@ -20,7 +20,7 @@ public class Box extends Parcel {
     }
 
     public double getVolumetricWeight() {
-        return (length * width * height) / VOLUMETRIC_DIVISOR;
+        return ((double) length * width * height) / VOLUMETRIC_DIVISOR;
     }
 
     @Override
